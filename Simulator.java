@@ -8,8 +8,8 @@ import java.awt.Color;
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Greg Babbert
+ * @version 2020.11.16
  */
 public class Simulator
 {
@@ -21,7 +21,9 @@ public class Simulator
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    // The probability that a rabbit will be created in any given grid position.
+    private static final double MOUNTAINLION_CREATION_PROBABILITY = 0.002;  
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -61,6 +63,7 @@ public class Simulator
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
+        view.setColor(MountainLion.class, Color.GREEN);
         
         // Setup a valid starting point.
         reset();
@@ -84,7 +87,7 @@ public class Simulator
     {
         for(int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
-            //delay(60);   // uncomment this to run more slowly
+            delay(30);   // uncomment this to run more slowly
         }
     }
     
@@ -145,6 +148,11 @@ public class Simulator
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
                     animals.add(rabbit);
+                }
+                else if(rand.nextDouble() <= MOUNTAINLION_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    MountainLion mountainlion = new MountainLion(true, field, location);
+                    animals.add(mountainlion);
                 }
                 // else leave the location empty.
             }

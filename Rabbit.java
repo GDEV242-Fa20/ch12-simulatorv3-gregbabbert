@@ -5,8 +5,8 @@ import java.util.Random;
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Greg Babbert
+ * @version 2020.11.16
  */
 public class Rabbit extends Animal
 {
@@ -107,8 +107,8 @@ public class Rabbit extends Animal
     }
     
     /**
-     * Return the maximum age of this animal.
-     * @return The maximum age of this animal.
+     * Return the breeding probability this animal.
+     * @return The breeding probability this animal.
      */
     public double getBreedingProbability()
     {
@@ -116,8 +116,8 @@ public class Rabbit extends Animal
     }
     
     /**
-     * Return the maximum age of this animal.
-     * @return The maximum age of this animal.
+     * Return the maximum litter size this animal.
+     * @return The maximum litter size this animal.
      */
     public int getMaxLitterSize()
     {

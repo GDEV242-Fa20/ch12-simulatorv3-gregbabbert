@@ -3,43 +3,48 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * A simple model of a fox.
- * Foxes age, move, eat rabbits, and die.
+ * This is a simple model for a mountain lion.
+ * Mountain lions don't require as much food as mountain lions
+ * because they're good at conserving their energy.
+ * Mountain lions also don't have offspring as much
+ * so their breeding probabbility is low. They also don't 
+ * attack other predators like mountain lions, so they're both competing
+ * for the same source of food.
  * 
  * @author Greg Babbert
  * @version 2020.11.16
  */
-public class Fox extends Animal
+public class MountainLion extends Animal
 {
-    // Characteristics shared by all foxes (class variables).
+    // Characteristics shared by all mountain lions (class variables).
     
-    // The age at which a fox can start to breed.
+    // The age at which a mountain lion can start to breed.
     private static final int BREEDING_AGE = 15;
-    // The age to which a fox can live.
+    // The age to which a mountain lion can live.
     private static final int MAX_AGE = 150;
-    // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    // The likelihood of a mountain lion breeding.
+    private static final double BREEDING_PROBABILITY = 0.0122;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+    private static final int MAX_LITTER_SIZE = 3;
     // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
+    // number of steps a mountain lion can go before it has to eat again.
+    private static final int RABBIT_FOOD_VALUE = 25;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
-    // The fox's food level, which is increased by eating rabbits.
+    // The mountain lion's food level, which is increased by eating rabbits.
     private int foodLevel;
 
     /**
-     * Create a fox. A fox can be created as a new born (age zero
+     * Create a mountain lion. A mountain lion can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
      * 
-     * @param randomAge If true, the fox will have random age and hunger level.
+     * @param randomAge If true, the mountain lion will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Fox(boolean randomAge, Field field, Location location)
+    public MountainLion(boolean randomAge, Field field, Location location)
     {
         super(field, location);
         if(randomAge) {
@@ -54,18 +59,18 @@ public class Fox extends Animal
     }
     
     /**
-     * This is what the fox does most of the time: it hunts for
+     * This is what the mountain lion does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
      * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newmountain lions A list to return newly born mountain lions.
      */
-    public void act(List<Animal> newFoxes)
+    public void act(List<Animal> newMountainLions)
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newFoxes);            
+            giveBirth(newMountainLions);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
             if(newLocation == null) { 
@@ -84,7 +89,7 @@ public class Fox extends Animal
     }
     
     /**
-     * Make this fox more hungry. This could result in the fox's death.
+     * Make this mountain lion more hungry. This could result in the mountain lion's death.
      */
     private void incrementHunger()
     {
@@ -120,26 +125,26 @@ public class Fox extends Animal
     }
     
     /**
-     * Check whether or not this fox is to give birth at this step.
+     * Check whether or not this mountain lion is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newMountainLions A list to return newly born mountain lions.
      */
-    private void giveBirth(List<Animal> newFoxes)
+    private void giveBirth(List<Animal> newMountainLions)
     {
-        // New foxes are born into adjacent locations.
+        // New mountain lions are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Fox young = new Fox(false, field, loc);
-            newFoxes.add(young);
+            MountainLion young = new MountainLion(false, field, loc);
+            newMountainLions.add(young);
         }
     }
 
     /**
-     * @return the age at which a rabit starts to breed.
+     * @return the age at which a mountain lion starts to breed.
      */
     public int getBreedingAge()
     {
@@ -147,7 +152,7 @@ public class Fox extends Animal
     }
     
     /**
-     * @return the rabbit's maximum age.
+     * @return the mountain lion's maximum age.
      */
     public int getMaxAge()
     {
@@ -164,7 +169,7 @@ public class Fox extends Animal
     
     /**
      * Return the breeding probability for this animal.
-     * @return The breeding probability for this animal.
+     * @return The breeding proability for this animal.
      */
     public double getBreedingProbability()
     {
