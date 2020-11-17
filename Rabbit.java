@@ -81,20 +81,6 @@ public class Rabbit extends Animal
             newRabbits.add(young);
         }
     }
-        
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
 
     /**
      * @return the age at which a rabit starts to breed.
@@ -110,6 +96,32 @@ public class Rabbit extends Animal
     public int getMaxAge()
     {
         return MAX_AGE;
+    }
+    
+    /**
+     * @return a random number.
+     */
+    public Random getRand()
+    {
+        return rand;
+    }
+    
+    /**
+     * Return the maximum age of this animal.
+     * @return The maximum age of this animal.
+     */
+    public double getBreedingProbability()
+    {
+        return BREEDING_PROBABILITY;
+    }
+    
+    /**
+     * Return the maximum age of this animal.
+     * @return The maximum age of this animal.
+     */
+    public int getMaxLitterSize()
+    {
+        return MAX_LITTER_SIZE;
     }
     
 }
