@@ -125,4 +125,22 @@ public abstract class Animal
      */
     abstract protected int getBreedingAge();
     
+    /**
+     * Increase the age.
+     * This could result in the rabbit's death.
+     */
+    public void incrementAge()
+    {
+        age++;
+        if(age > getMaxAge()) {
+            setDead();
+        }
+    }
+    
+    /**
+     * Return the maximum age of this animal.
+     * @return The maximum age of this animal.
+     */
+    abstract protected int getMaxAge();
+    
 }
