@@ -14,6 +14,8 @@ public abstract class Animal
     private Field field;
     // The animal's position in the field.
     private Location location;
+    // An animal's age.
+    private int age;
     
     /**
      * Create a new animal at location in field.
@@ -23,6 +25,7 @@ public abstract class Animal
      */
     public Animal(Field field, Location location)
     {
+        age = 0;
         alive = true;
         this.field = field;
         setLocation(location);
@@ -88,4 +91,38 @@ public abstract class Animal
     {
         return field;
     }
+    
+    /**
+     * Sets tha animal's age.
+     * @param new int The animal's new age.
+     */
+    protected void setAge(int age)
+    {
+        this.age = age;
+    }
+    
+    /**
+     * Return the animal's age.
+     * @return The animal's age.
+     */
+    protected int getAge()
+    {
+        return age;
+    }
+
+    /**
+     * An animal can breed if it has reached the breeding age.
+     * @return true if the animal can breed
+     */
+    public boolean canBreed()
+    {
+        return age >= getBreedingAge();
+    }
+
+    /**
+     * Return the breeding age of this animal.
+     * @return The breeding age of this animal.
+     */
+    abstract protected int getBreedingAge();
+    
 }
